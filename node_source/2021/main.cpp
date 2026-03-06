@@ -96,6 +96,7 @@ void setupMultiSfRx(uint8_t mainSf);
 uint8_t getSfFromDetector(uint8_t detector);
 uint8_t getBwCode(float bandwidth);
 uint8_t getCrCode(uint8_t codingRate);
+uint8_t getLdroSetting(uint8_t sf, float bandwidth);
 
 void setup() {
     Serial.setRxBufferSize(4096);
@@ -210,6 +211,22 @@ uint8_t getCrCode(uint8_t codingRate) {
     }
 }
 
+// 获取 LDRO (Low Data Rate Optimization) 设置
+// LDRO = 0 (OFF): SF5-10 任意BW, SF11 + BW>=250, SF12 + BW>=406
+// LDRO = 1 (ON): SF11 + BW125, SF12 + BW125/250
+uint8_t getLdroSetting(uint8_t sf, float bandwidth) {
+    if (sf <= 10) {
+        return LR2021_LORA_LDRO_OFF;
+    }
+    if (sf == 11 && bandwidth >= 250.0f) {
+        return LR2021_LORA_LDRO_OFF;
+    }
+    if (sf == 12 && bandwidth >= 400.0f) {
+        return LR2021_LORA_LDRO_OFF;
+    }
+    return LR2021_LORA_LDRO_ON;
+}
+
 // 设置多 SF 接收
 // 规则: 包含主 SF 共 4 个，如果 SF 超过 12 则不配置
 void setupMultiSfRx(uint8_t mainSf) {
@@ -218,14 +235,56 @@ void setupMultiSfRx(uint8_t mainSf) {
     // 计算 side SF，往后数最多 3 个，但不超过 SF12
     uint8_t sideSf1 = 0, sideSf2 = 0, sideSf3 = 0;
 
-    if (mainSf + 1 <= MAX_SF) {
-        sideSf1 = mainSf + 1;
-    }
-    if (mainSf + 2 <= MAX_SF) {
-        sideSf2 = mainSf + 2;
-    }
-    if (mainSf + 3 <= MAX_SF) {
-        sideSf3 = mainSf + 3;
+    switch (mainSf)
+    {
+    case 5:
+        sideSf1 = 6;
+        sideSf2 = 7;
+        sideSf3 = 8;
+        break;
+    case 6:
+        sideSf1 = 7;
+        sideSf2 = 8;
+        sideSf3 = 9;
+        break;
+    case 7:
+        sideSf1 = 8;
+        sideSf2 = 9;
+        sideSf3 = 10;
+        break;
+    case 8:
+        sideSf1 = 9;
+        sideSf2 = 10;
+        sideSf3 = 11;
+        break;
+    case 9:
+        sideSf1 = 10;
+        sideSf2 = 11;
+        sideSf3 = 12;
+        break;
+    case 10:
+        sideSf1 = 11;
+        sideSf2 = 12;
+        sideSf3 = 0;  // SF13 不存在
+        break;
+    case 11:
+        sideSf1 = 12;
+        sideSf2 = 0;
+        sideSf3 = 0;
+        break;
+    case 12:
+        // SF12 是最高的，没有 side SF
+        sideSf1 = 0;
+        sideSf2 = 0;
+        sideSf3 = 0;
+        break;
+    default:
+        // 未知 SF，使用 SF9 作为默认
+        mainSf = 9;
+        sideSf1 = 10;
+        sideSf2 = 11;
+        sideSf3 = 12;
+        break;
     }
 
     configuredSideSf[0] = sideSf1;
@@ -628,7 +687,7 @@ void handleTxData(const PacketDecoder::DecodedPacket& packet) {
                     targetSf,
                     getBwCode(currentLoRaParams.bandwidth),
                     getCrCode(currentLoRaParams.coding_rate),
-                    LR2021_LORA_LDRO_OFF
+                    getLdroSetting(targetSf, currentLoRaParams.bandwidth)
                 );
                 sfChanged = true;
             }
@@ -651,7 +710,7 @@ void handleTxData(const PacketDecoder::DecodedPacket& packet) {
                     originalSf,
                     getBwCode(currentLoRaParams.bandwidth),
                     getCrCode(currentLoRaParams.coding_rate),
-                    LR2021_LORA_LDRO_OFF
+                    getLdroSetting(originalSf, currentLoRaParams.bandwidth)
                 );
             }
         }
@@ -677,7 +736,7 @@ void configureLoRa(const LoRaParam& params) {
         params.spreading_factor,
         getBwCode(params.bandwidth),
         getCrCode(params.coding_rate),
-        LR2021_LORA_LDRO_OFF
+        getLdroSetting(params.spreading_factor, params.bandwidth)
     );
 
     // 设置同步字

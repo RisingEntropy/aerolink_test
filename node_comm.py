@@ -333,7 +333,14 @@ def calc_time_on_air(
     t_preamble = (preamble + 4.25) * t_sym
 
     # 低速率优化
-    de = 1 if (sf >= 11 and bw_khz <= 125) else 0
+    # LDRO ON: SF11+BW125, SF12+BW125/250
+    # LDRO OFF: 其他情况
+    if sf == 11 and bw_khz <= 125:
+        de = 1
+    elif sf == 12 and bw_khz <= 250:
+        de = 1
+    else:
+        de = 0
     h = 0 if explicit_header else 1
     crc_bits = 16 if crc else 0
 

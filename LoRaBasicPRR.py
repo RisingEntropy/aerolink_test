@@ -38,14 +38,24 @@ from node_comm import (
 # 每个参数组合发送的测试包数量
 PACKETS_PER_COMBO = 100
 
-# TX 功率 (dBm) — 根据衰减器手动调整，使 RX 端 RSSI ≈ -100 dBm
-TX_POWER = 0
+# TX 功率相关配置
+TX_POWER_MIN = -9       # 最小发射功率 (dBm)
+TX_POWER_MAX = 22        # 最大发射功率 (dBm)
+TX_POWER_DEFAULT = -6     # 默认起始功率 (dBm)
+
+# 目标 RSSI 配置
+TARGET_RSSI = -102.0     # 目标 RSSI (dBm)
+TARGET_RSSI_TOLERANCE = 2.0  # 允许误差 (±dB)
+
+# 功率校准配置
+CALIBRATION_PACKETS = 1  # 校准时发送的包数量
+CALIBRATION_MAX_ATTEMPTS = 10  # 最大校准尝试次数
 
 # 固定参数
 CODING_RATE = 5  # 4/5
 SYNC_WORD = 0x12  # Private sync word
 PREAMBLE_LENGTH = 8
-PAYLOAD_SIZE = 32  # 测试包负载大小 (bytes)
+PAYLOAD_SIZE = 64  # 测试包负载大小 (bytes)
 
 # 频点列表 (MHz) — 覆盖 Sub-GHz (470-510 / 850-920) 和 1.4 GHz (1430-1444)
 FREQUENCIES = [
@@ -59,10 +69,9 @@ FREQUENCIES = [
 
 # Spreading Factor 列表
 SF_LIST = [5, 6, 7, 8, 9, 10, 11, 12]
-
+# SF_LIST = [11]  # 快速测试用
 # Bandwidth 列表 (kHz)
-BW_LIST = [125.0, 250.0, 500.0, 1000.0]
-
+BW_LIST = [125.0, 250.0, 400.0, 500.0]
 # 输出目录
 OUTPUT_DIR = Path("LoRa Basic PRR")
 CHARTS_DIR = OUTPUT_DIR / "charts"
@@ -80,6 +89,7 @@ class PRRTester:
         self.raw_rx_data: list[dict] = []  # 所有原始 RX 包
         self.start_time: float = 0
         self._interrupted = False
+        self.current_tx_power: int = TX_POWER_DEFAULT  # 当前校准后的发射功率
 
     # ---- 初始化 ----
 
@@ -119,7 +129,7 @@ class PRRTester:
                     cr_val = CODING_RATE - 4  # coding_rate 5 → cr=1
                     toa = calc_time_on_air(sf, bw, PAYLOAD_SIZE, PREAMBLE_LENGTH, cr_val)
                     # 每包: 超时时间 = max(0.1, toa + 0.05)
-                    per_packet = max(0.1, toa + 0.05)
+                    per_packet = max(0.1, toa + 0.3)
                     estimated_seconds += per_packet * PACKETS_PER_COMBO
                     # 加上参数切换开销
                     estimated_seconds += 0.1
@@ -134,8 +144,8 @@ class PRRTester:
         print(f"  参数组合:  {n_combos}")
         print(f"  每组包数:  {PACKETS_PER_COMBO}")
         print(f"  总包数:    {total_packets}")
-        print(f"  TX 功率:   {TX_POWER} dBm")
-        print(f"  预估耗时:  {est_minutes:.1f} 分钟")
+        print(f"  TX 功率:   自动校准 (目标 RSSI={TARGET_RSSI}±{TARGET_RSSI_TOLERANCE}dBm)")
+        print(f"  预估耗时:  {est_minutes:.1f} 分钟 (不含校准时间)")
         print(f"{'=' * 60}")
 
         input("\n按 Enter 开始测试 (Ctrl+C 随时中断)...")
@@ -168,16 +178,31 @@ class PRRTester:
                         break
 
                     current_combo += 1
+
+                    # 先进行功率校准
                     print(
                         f"[{self._now()}] "
                         f"({current_combo}/{total_combos}) "
-                        f"Freq={freq}MHz, SF{sf}, BW={bw}kHz ... ",
+                        f"Freq={freq}MHz, SF{sf}, BW={bw}kHz 校准中... ",
                         end="",
                         flush=True,
                     )
 
                     try:
-                        result = self._test_combination(freq, sf, bw)
+                        calibrated_power = self._calibrate_tx_power(freq, sf, bw)
+
+                        if calibrated_power is None:
+                            print("校准失败 (无法收到包)")
+                            self.results.append(
+                                self._make_result(freq, sf, bw, status="CALIBRATION_FAILED")
+                            )
+                            continue
+
+                        self.current_tx_power = calibrated_power
+                        print(f"TxPower={calibrated_power}dBm, 测试中... ", end="", flush=True)
+
+                        # 执行正式测试
+                        result = self._test_combination(freq, sf, bw, calibrated_power)
                         self.results.append(result)
 
                         # 打印结果摘要
@@ -213,12 +238,120 @@ class PRRTester:
 
         self.save_results()
 
-    def _test_combination(self, freq: float, sf: int, bw: float) -> dict:
+    def _calibrate_tx_power(self, freq: float, sf: int, bw: float) -> int | None:
+        """
+        校准发射功率，使 RSSI 达到目标值 (TARGET_RSSI ± TARGET_RSSI_TOLERANCE)。
+
+        返回校准后的功率值，如果校准失败返回 None。
+        """
+        cr_val = CODING_RATE - 4
+        toa = calc_time_on_air(sf, bw, PAYLOAD_SIZE, PREAMBLE_LENGTH, cr_val)
+        rx_timeout = max(0.2, toa + 0.5)
+
+        # 从默认功率开始
+        current_power = TX_POWER_DEFAULT
+
+        for attempt in range(CALIBRATION_MAX_ATTEMPTS):
+            # 配置 RX
+            self.rx_module.set_lora_params(
+                mode=NodeWorkingMode.RX,
+                frequency=freq,
+                bandwidth=bw,
+                spreading_factor=sf,
+                coding_rate=CODING_RATE,
+                sync_word=SYNC_WORD,
+                tx_power=current_power,
+                preamble_length=PREAMBLE_LENGTH,
+            )
+            time.sleep(0.1)
+            self.rx_module.ser.reset_input_buffer()
+            self.rx_module.decoder = FrameDecoder()
+
+            # 配置 TX
+            self.tx_module.set_lora_params(
+                mode=NodeWorkingMode.TX,
+                frequency=freq,
+                bandwidth=bw,
+                spreading_factor=sf,
+                coding_rate=CODING_RATE,
+                sync_word=SYNC_WORD,
+                tx_power=current_power,
+                preamble_length=PREAMBLE_LENGTH,
+            )
+            time.sleep(0.1)
+
+            # 发送校准包并收集 RSSI
+            rssi_samples = []
+            CALIBRATION_PAYLOAD_SIZE = 4
+            for seq in range(CALIBRATION_PAYLOAD_SIZE):
+                payload = bytearray(CALIBRATION_PAYLOAD_SIZE)
+                payload[0] = seq & 0xFF
+                payload[1] = 0xCA  # 校准包标记
+                for i in range(2, CALIBRATION_PAYLOAD_SIZE):
+                    payload[i] = (seq + i) & 0xFF
+
+                self.tx_module.send_tx_data(bytes(payload), target_sf=sf)
+
+                deadline = time.monotonic() + rx_timeout
+                while time.monotonic() < deadline:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        break
+                    frame = self.rx_module.read_frame(timeout=remaining)
+                    if frame is None:
+                        break
+                    pkt_type, rx_payload = frame
+                    if pkt_type == PacketType.RX_DATA:
+                        try:
+                            parsed = self.rx_module.parse_rx_data(rx_payload)
+                            if parsed.get("crc_status") == 1:
+                                rssi_samples.append(parsed["rssi"])
+                        except Exception:
+                            pass
+                        break
+
+            # 如果没收到任何包，增加功率
+            if not rssi_samples:
+                if current_power < TX_POWER_MAX:
+                    current_power = min(current_power + 3, TX_POWER_MAX)
+                    continue
+                else:
+                    return None  # 最大功率仍无法收到包
+
+            # 计算平均 RSSI
+            avg_rssi = sum(rssi_samples) / len(rssi_samples)
+
+            # 检查是否在目标范围内
+            if abs(avg_rssi - TARGET_RSSI) <= TARGET_RSSI_TOLERANCE:
+                return current_power  # 校准成功
+
+            # 调整功率
+            rssi_diff = avg_rssi - TARGET_RSSI  # 正数表示信号太强
+
+            # 粗略估算：RSSI 变化 ≈ TX 功率变化
+            power_adjust = int(round(-rssi_diff))
+
+            # 限制单次调整幅度
+            power_adjust = max(-5, min(5, power_adjust))
+
+            new_power = current_power + power_adjust
+            new_power = max(TX_POWER_MIN, min(TX_POWER_MAX, new_power))
+
+            if new_power == current_power:
+                # 无法继续调整，接受当前结果
+                return current_power
+
+            current_power = new_power
+
+        # 超过最大尝试次数，返回当前功率
+        return current_power
+
+    def _test_combination(self, freq: float, sf: int, bw: float, tx_power: int) -> dict:
         """测试单个参数组合: 逐包发送，每包等待接收（超时则判定丢包）"""
         cr_val = CODING_RATE - 4  # coding_rate 5 → cr=1 for ToA calc
         toa = calc_time_on_air(sf, bw, PAYLOAD_SIZE, PREAMBLE_LENGTH, cr_val)
         # 超时 = 空中时间 + 50ms 处理余量，最小 100ms
-        rx_timeout = max(0.1, toa + 0.05)
+        rx_timeout = max(0.1, toa + 0.3)
 
         # 1. 配置 RX 模组
         self.rx_module.set_lora_params(
@@ -228,10 +361,10 @@ class PRRTester:
             spreading_factor=sf,
             coding_rate=CODING_RATE,
             sync_word=SYNC_WORD,
-            tx_power=TX_POWER,
+            tx_power=tx_power,
             preamble_length=PREAMBLE_LENGTH,
         )
-        time.sleep(0.05)  # 等待 RX 就绪
+        time.sleep(0.5)  # 等待 RX 就绪
 
         # 清空 RX 缓冲区和解码器状态，避免旧数据干扰
         self.rx_module.ser.reset_input_buffer()
@@ -245,10 +378,10 @@ class PRRTester:
             spreading_factor=sf,
             coding_rate=CODING_RATE,
             sync_word=SYNC_WORD,
-            tx_power=TX_POWER,
+            tx_power=tx_power,
             preamble_length=PREAMBLE_LENGTH,
         )
-        time.sleep(0.02)
+        time.sleep(0.5)
 
         # 3. 逐包发送 & 等待接收
         rx_packets = []
@@ -298,19 +431,20 @@ class PRRTester:
             self.raw_rx_data.append(pkt_record)
 
         # 5. 统计
-        return self._compute_result(freq, sf, bw, sent_count, rx_packets)
+        return self._compute_result(freq, sf, bw, tx_power, sent_count, rx_packets)
 
     def _compute_result(
         self,
         freq: float,
         sf: int,
         bw: float,
+        tx_power: int,
         sent: int,
         rx_packets: list[dict],
     ) -> dict:
         """统计接收结果"""
         if not rx_packets:
-            return self._make_result(freq, sf, bw, sent=sent, status="NO_RESPONSE")
+            return self._make_result(freq, sf, bw, sent=sent, tx_power=tx_power, status="NO_RESPONSE")
 
         crc_ok = sum(1 for p in rx_packets if p.get("crc_status") == 1)
         crc_fail = sum(1 for p in rx_packets if p.get("crc_status") == 0)
@@ -327,6 +461,7 @@ class PRRTester:
             freq,
             sf,
             bw,
+            tx_power=tx_power,
             sent=sent,
             received=total_received,
             crc_ok=crc_ok,
@@ -348,7 +483,7 @@ class PRRTester:
             "frequency": freq,
             "sf": sf,
             "bandwidth": bw,
-            "tx_power": TX_POWER,
+            "tx_power": kwargs.get("tx_power", 0),
             "sent": kwargs.get("sent", 0),
             "received": kwargs.get("received", 0),
             "crc_ok": kwargs.get("crc_ok", 0),
@@ -435,7 +570,7 @@ class PRRTester:
             f.write(f"  SF: {SF_LIST}\n")
             f.write(f"  BW: {BW_LIST}\n")
             f.write(f"  每组包数: {PACKETS_PER_COMBO}\n")
-            f.write(f"  TX 功率: {TX_POWER} dBm\n")
+            f.write(f"  TX 功率: 自动校准 (目标 RSSI={TARGET_RSSI}±{TARGET_RSSI_TOLERANCE}dBm)\n")
             f.write(f"  编码率: 4/{CODING_RATE}\n")
             f.write(f"  负载大小: {PAYLOAD_SIZE} bytes\n\n")
 
@@ -495,7 +630,9 @@ class PRRTester:
                 "sf_list": SF_LIST,
                 "bw_list": BW_LIST,
                 "packets_per_combo": PACKETS_PER_COMBO,
-                "tx_power": TX_POWER,
+                "tx_power": "auto_calibrated",
+                "target_rssi": TARGET_RSSI,
+                "target_rssi_tolerance": TARGET_RSSI_TOLERANCE,
                 "coding_rate": CODING_RATE,
                 "sync_word": SYNC_WORD,
                 "preamble_length": PREAMBLE_LENGTH,
