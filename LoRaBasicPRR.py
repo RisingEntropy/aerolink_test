@@ -1057,10 +1057,94 @@ class PRRTester:
 
 
 # ============================================================
+#  从 JSON 文件重新绘图
+# ============================================================
+
+def replot_from_json(json_path: str | Path):
+    """
+    从已保存的 JSON 文件读取数据并重新生成图表。
+
+    Args:
+        json_path: raw_data.json 文件的路径
+    """
+    json_path = Path(json_path)
+
+    if not json_path.exists():
+        print(f"错误: 文件不存在: {json_path}")
+        sys.exit(1)
+
+    print(f"正在读取数据: {json_path}")
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # 提取结果数据
+    results = data.get("results", [])
+    if not results:
+        print("错误: JSON 文件中没有结果数据")
+        sys.exit(1)
+
+    # 提取测试配置（用于确定测试参数范围）
+    test_config = data.get("test_config", {})
+
+    # 创建一个用于绘图的 tester 实例
+    tester = PRRTester()
+    tester.results = results
+
+    # 确定输出目录（与 JSON 文件同目录）
+    output_dir = json_path.parent
+    charts_dir = output_dir / "charts"
+    charts_dir.mkdir(parents=True, exist_ok=True)
+
+    # 临时修改全局变量以指向正确的目录
+    global OUTPUT_DIR, CHARTS_DIR
+    OUTPUT_DIR = output_dir
+    CHARTS_DIR = charts_dir
+
+    print(f"结果数量: {len(results)}")
+    print(f"图表将保存到: {charts_dir}")
+
+    # 生成图表
+    tester._generate_charts()
+
+    print("绘图完成！")
+
+
+# ============================================================
 #  主入口
 # ============================================================
 
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="LoRa Basic PRR Test - 测试 LoRa 模组的包接收率",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  # 运行完整测试
+  python LoRaBasicPRR.py
+
+  # 从 JSON 文件重新绘图
+  python LoRaBasicPRR.py --replot "LoRa Basic PRR/raw_data.json"
+  python LoRaBasicPRR.py -r path/to/raw_data.json
+        """
+    )
+
+    parser.add_argument(
+        "-r", "--replot",
+        metavar="JSON_FILE",
+        help="从指定的 JSON 文件重新生成图表（不运行测试）"
+    )
+
+    args = parser.parse_args()
+
+    # 如果指定了 --replot，则从 JSON 文件重新绘图
+    if args.replot:
+        replot_from_json(args.replot)
+        return
+
+    # 否则运行完整测试
     tester = PRRTester()
 
     try:

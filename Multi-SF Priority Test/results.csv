@@ -1,0 +1,13 @@
+scenario,sf,is_primary,tx_power,count,rate
+equal_power,5,Yes,10,3,3.00
+equal_power,6,No,10,0,0.00
+equal_power,7,No,10,15,15.00
+equal_power,8,No,10,82,82.00
+secondary_high_power,5,Yes,-9,0,0.00
+secondary_high_power,6,No,10,0,0.00
+secondary_high_power,7,No,10,21,21.21
+secondary_high_power,8,No,10,78,78.79
+primary_high_power,5,Yes,10,55,55.56
+primary_high_power,6,No,-9,0,0.00
+primary_high_power,7,No,-9,44,44.44
+primary_high_power,8,No,-9,0,0.00

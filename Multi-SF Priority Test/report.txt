@@ -1,0 +1,52 @@
+======================================================================
+Multi-SF Priority Test Report
+Test Time: 2026-03-07 22:34:51
+Duration:  0.2 minutes
+======================================================================
+
+[Objective]
+  Verify demodulation priority when multiple SF signals arrive simultaneously:
+  - Primary SF priority vs. Maximum Power priority.
+
+[Device Info]
+  RX: LoRaModule(port='/dev/cu.usbmodem113201', name='RX', model='LR2021', id=0C332B697090)
+  TX1 (SF5, Primary SF): LoRaModule(port='/dev/cu.usbmodem112401', name='TX1-SF5', model='LR2021', id=14332B697090)
+  TX2 (SF6, Secondary SF): LoRaModule(port='/dev/cu.usbmodem112301', name='TX2-SF6', model='LR2021', id=34332B697090)
+  TX3 (SF7, Secondary SF): LoRaModule(port='/dev/cu.usbmodem112201', name='TX3-SF7', model='LR2021', id=1C332B697090)
+  TX4 (SF8, Secondary SF): LoRaModule(port='/dev/cu.usbmodem112101', name='TX4-SF8', model='LR2021', id=2C332B697090)
+
+[Test Parameters]
+  Frequency: 1439.0 MHz
+  Bandwidth: 500.0 kHz
+  Primary SF: SF5
+  Secondary SFs: [6, 7, 8]
+  Iterations/Scenario: 100
+
+[Results]
+
+All TX Equal Power (10 dBm):
+    SF     Type    Power  Count     Rate
+  ----------------------------------------
+     5  Primary      10dB      3     3.0%
+     6   Second      10dB      0     0.0%
+     7   Second      10dB     15    15.0%
+     8   Second      10dB     82    82.0%
+
+Secondary SF High (10 dBm), Primary SF Low (-9 dBm):
+    SF     Type    Power  Count     Rate
+  ----------------------------------------
+     5  Primary      -9dB      0     0.0%
+     6   Second      10dB      0     0.0%
+     7   Second      10dB     21    21.2%
+     8   Second      10dB     78    78.8%
+
+Primary SF High (10 dBm), Secondary SF Low (-9 dBm):
+    SF     Type    Power  Count     Rate
+  ----------------------------------------
+     5  Primary      10dB     55    55.6%
+     6   Second      -9dB      0     0.0%
+     7   Second      -9dB     44    44.4%
+     8   Second      -9dB      0     0.0%
+
+======================================================================
+[Conclusion]

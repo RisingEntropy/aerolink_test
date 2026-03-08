@@ -1,0 +1,3121 @@
+{
+  "test_config": {
+    "frequency": 1439.0,
+    "bandwidth": 500.0,
+    "sf_list": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "primary_sf": 5,
+    "packets_per_test": 100,
+    "coding_rate": 5,
+    "sync_word": 18,
+    "preamble_length": 8,
+    "payload_size": 32
+  },
+  "devices": {
+    "rx": {
+      "port": "/dev/cu.usbmodem113201",
+      "model": "LR2021",
+      "node_id": "0C332B697090",
+      "firmware": "2.0.0"
+    },
+    "tx_modules": [
+      {
+        "sf": 5,
+        "port": "/dev/cu.usbmodem112401",
+        "model": "LR2021",
+        "node_id": "14332B697090",
+        "firmware": "2.0.0"
+      },
+      {
+        "sf": 6,
+        "port": "/dev/cu.usbmodem112301",
+        "model": "LR2021",
+        "node_id": "34332B697090",
+        "firmware": "2.0.0"
+      },
+      {
+        "sf": 7,
+        "port": "/dev/cu.usbmodem112201",
+        "model": "LR2021",
+        "node_id": "1C332B697090",
+        "firmware": "2.0.0"
+      },
+      {
+        "sf": 8,
+        "port": "/dev/cu.usbmodem112101",
+        "model": "LR2021",
+        "node_id": "2C332B697090",
+        "firmware": "2.0.0"
+      }
+    ]
+  },
+  "results": {
+    "equal_power": {
+      "scenario": "equal_power",
+      "description": "All TX Equal Power (10 dBm)",
+      "powers": {
+        "5": 10,
+        "6": 10,
+        "7": 10,
+        "8": 10
+      },
+      "tx_count": 100,
+      "decoded_counts": {
+        "5": 3,
+        "6": 0,
+        "7": 15,
+        "8": 82,
+        "none": 0
+      },
+      "decode_rates": {
+        "5": 3.0,
+        "6": 0.0,
+        "7": 15.0,
+        "8": 82.0
+      },
+      "total_decoded": 100,
+      "no_decode_count": 0,
+      "primary_sf": 5
+    },
+    "secondary_high_power": {
+      "scenario": "secondary_high_power",
+      "description": "Secondary SF High (10 dBm), Primary SF Low (-9 dBm)",
+      "powers": {
+        "5": -9,
+        "6": 10,
+        "7": 10,
+        "8": 10
+      },
+      "tx_count": 100,
+      "decoded_counts": {
+        "5": 0,
+        "6": 0,
+        "7": 21,
+        "8": 78,
+        "none": 1
+      },
+      "decode_rates": {
+        "5": 0.0,
+        "6": 0.0,
+        "7": 21.21212121212121,
+        "8": 78.78787878787878
+      },
+      "total_decoded": 99,
+      "no_decode_count": 1,
+      "primary_sf": 5
+    },
+    "primary_high_power": {
+      "scenario": "primary_high_power",
+      "description": "Primary SF High (10 dBm), Secondary SF Low (-9 dBm)",
+      "powers": {
+        "5": 10,
+        "6": -9,
+        "7": -9,
+        "8": -9
+      },
+      "tx_count": 100,
+      "decoded_counts": {
+        "5": 55,
+        "6": 0,
+        "7": 44,
+        "8": 0,
+        "none": 1
+      },
+      "decode_rates": {
+        "5": 55.55555555555556,
+        "6": 0.0,
+        "7": 44.44444444444444,
+        "8": 0.0
+      },
+      "total_decoded": 99,
+      "no_decode_count": 1,
+      "primary_sf": 5
+    }
+  },
+  "raw_rx_packets": [
+    {
+      "seq": 0,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 1,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 2,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 3,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -107.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 4,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 5,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -6.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 6,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 7,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 8,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 9,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 10,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 11,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 12,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": -14.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 13,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 14,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 15,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 16,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 17,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 18,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 19,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 20,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 21,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 22,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 23,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 24,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 25,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 26,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 27,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 28,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 29,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 30,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 31,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 32,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 33,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 34,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 35,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 36,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 37,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 38,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 39,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 40,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 41,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 42,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 43,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 44,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 45,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 46,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 47,
+      "scenario": "equal_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -106.0,
+      "snr": -6.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 48,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 49,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 6.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 50,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -110.0,
+      "snr": -4.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 51,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 52,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 53,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 54,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 55,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 56,
+      "scenario": "equal_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -105.0,
+      "snr": -5.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 57,
+      "scenario": "equal_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -109.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 58,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 59,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 60,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 61,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -109.0,
+      "snr": -8.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 62,
+      "scenario": "equal_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 63,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 64,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 65,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 66,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 67,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 68,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 69,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 70,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 71,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 72,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 73,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 74,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 75,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 76,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -4.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 77,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 78,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 79,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 80,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 81,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 82,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 83,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 84,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 85,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 86,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 87,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 88,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 89,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 90,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 91,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 92,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 93,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 94,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 95,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 96,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 97,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 98,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 99,
+      "scenario": "equal_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 0,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 1,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 2,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 6.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 3,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 4,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 5,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 6,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 7,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 8,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 9,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 10,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 11,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 12,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 13,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 14,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 15,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 17,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 18,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 19,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 6.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 20,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -109.0,
+      "snr": -6.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 21,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 22,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 23,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 24,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 25,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 26,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 27,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 28,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 29,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -107.0,
+      "snr": -8.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 30,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 31,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 32,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 33,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 34,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 35,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 36,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 37,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 6.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 38,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": -10.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 39,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 40,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 41,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 42,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 43,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 44,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -105.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 45,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -12.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 46,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -109.0,
+      "snr": -5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 47,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 48,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 49,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 50,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 51,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 52,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 53,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 54,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 4.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 55,
+      "scenario": "secondary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -106.0,
+      "snr": 5.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 56,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -4.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 57,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -109.0,
+      "snr": -5.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 58,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 59,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 60,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 61,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 62,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 63,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 64,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 65,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 66,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 67,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 68,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 69,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 70,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 71,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 72,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 73,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 74,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 75,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 76,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 77,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 78,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 79,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 80,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 81,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 82,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 83,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 84,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 85,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 86,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 87,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 88,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 89,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 90,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 91,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -2.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 92,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 93,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 94,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -2.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 95,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 96,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 97,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 0,
+      "tx_power": 10
+    },
+    {
+      "seq": 98,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 99,
+      "scenario": "secondary_high_power",
+      "detected_sf": 8,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -3.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 0,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 1,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 2,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 3,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 4,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 5,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 6,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 7,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 8,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 9,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 10,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 11,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 12,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 13,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 14,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 15,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 16,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 17,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 18,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 19,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 20,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -112.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 21,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 22,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 23,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 24,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 25,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 26,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 27,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 28,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 29,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 30,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 31,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -12.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 32,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 33,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 34,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 35,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 36,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 37,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 38,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 39,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 40,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 41,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 42,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -110.0,
+      "snr": -12.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 43,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 44,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 45,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 46,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 47,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -110.0,
+      "snr": -12.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 48,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 49,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 50,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 51,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 52,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -110.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 53,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 54,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 55,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 56,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 57,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 58,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 59,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 60,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 61,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 62,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 63,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 64,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 65,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 66,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 67,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 68,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 69,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 70,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 71,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 72,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 73,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 74,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 75,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 76,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 77,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 78,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 79,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 80,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 81,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -111.0,
+      "snr": -12.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 82,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 83,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": -1.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 84,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 85,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 86,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 87,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -11.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 88,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 89,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 90,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 91,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -9.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 92,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -113.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 93,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 94,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 95,
+      "scenario": "primary_high_power",
+      "detected_sf": 7,
+      "is_primary": false,
+      "rssi": -114.0,
+      "snr": -10.0,
+      "crc_status": 0,
+      "tx_power": -9
+    },
+    {
+      "seq": 97,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 98,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -110.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    },
+    {
+      "seq": 99,
+      "scenario": "primary_high_power",
+      "detected_sf": 5,
+      "is_primary": true,
+      "rssi": -111.0,
+      "snr": 0.0,
+      "crc_status": 1,
+      "tx_power": 10
+    }
+  ]
+}
