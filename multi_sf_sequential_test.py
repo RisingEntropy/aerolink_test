@@ -58,7 +58,7 @@ PREAMBLE_LENGTH = 8
 PAYLOAD_SIZE = 32  # 测试包负载大小 (bytes)
 
 # TX 功率配置
-TX_POWER = 10  # dBm
+TX_POWER = 0  # dBm
 
 # 输出目录
 OUTPUT_DIR = Path("Multi-SF Sequential Test")

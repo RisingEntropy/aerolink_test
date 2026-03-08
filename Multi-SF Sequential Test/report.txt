@@ -1,6 +1,6 @@
 ======================================================================
 Multi-SF Sequential Test Report (多 SF 顺序测试)
-测试时间: 2026-03-07 22:32:15
+测试时间: 2026-03-08 13:40:10
 测试耗时: 4.6 分钟
 ======================================================================
 
@@ -9,8 +9,8 @@ Multi-SF Sequential Test Report (多 SF 顺序测试)
 
 【设备信息】
   RX: LoRaModule(port='/dev/cu.usbmodem113201', name='RX', model='LR2021', id=0C332B697090)
-  TX1: LoRaModule(port='/dev/cu.usbmodem112401', name='TX-SF8', model='LR2021', id=14332B697090)
-  TX2: LoRaModule(port='/dev/cu.usbmodem112301', name='TX-SF9', model='LR2021', id=34332B697090)
+  TX1: LoRaModule(port='/dev/cu.usbmodem112401', name='TX-SF8', model='LR2021', id=34332B697090)
+  TX2: LoRaModule(port='/dev/cu.usbmodem112301', name='TX-SF9', model='LR2021', id=14332B697090)
   TX3: LoRaModule(port='/dev/cu.usbmodem112201', name='TX-SF10', model='LR2021', id=1C332B697090)
   TX4: LoRaModule(port='/dev/cu.usbmodem112101', name='TX-SF11', model='LR2021', id=2C332B697090)
 
@@ -19,7 +19,7 @@ Multi-SF Sequential Test Report (多 SF 顺序测试)
   带宽: 500.0 kHz
   测试 SF: [5, 6, 7, 8, 9, 10, 11]
   TX 数量: 4
-  TX 功率: 10 dBm
+  TX 功率: 0 dBm
   每 SF 发包数: 100
   测试窗口: 4
 
@@ -28,41 +28,41 @@ Multi-SF Sequential Test Report (多 SF 顺序测试)
 主 SF = 5, 窗口 SF = [5, 6, 7, 8]:
     SF     Role     TX     RX      PRR     RSSI      SNR
   --------------------------------------------------
-     5  Primary    100    100   100.0%  -110.2     0.3
-     6   Second    100     99    99.0%  -113.0    -5.1
-     7   Second    100    100   100.0%  -105.0     6.9
-     8   Second    100    100   100.0%  -111.7    -1.1
+     5  Primary    100    100   100.0%  -102.0     5.1
+     6   Second    100    100   100.0%   -84.9    12.8
+     7   Second    100     99    99.0%   -84.2    14.6
+     8   Second    100    100   100.0%   -99.3     8.4
 
 主 SF = 6, 窗口 SF = [6, 7, 8, 9]:
     SF     Role     TX     RX      PRR     RSSI      SNR
   --------------------------------------------------
-     6  Primary    100    100   100.0%  -109.3     1.9
-     7   Second    100    100   100.0%  -113.0    -5.3
-     8   Second    100    100   100.0%  -105.0     7.0
-     9   Second    100    100   100.0%  -111.8    -1.9
+     6  Primary    100    100   100.0%  -100.8     7.0
+     7   Second    100    100   100.0%   -84.7    14.5
+     8   Second    100    100   100.0%   -85.6    15.5
+     9   Second    100    100   100.0%  -100.6     6.6
 
 主 SF = 7, 窗口 SF = [7, 8, 9, 10]:
     SF     Role     TX     RX      PRR     RSSI      SNR
   --------------------------------------------------
-     7  Primary    100    100   100.0%  -109.3     2.0
-     8   Second    100    100   100.0%  -113.0    -5.3
-     9   Second    100    100   100.0%  -105.0     6.6
-    10   Second    100    100   100.0%  -111.8    -2.0
+     7  Primary    100    100   100.0%  -100.9     7.0
+     8   Second    100    100   100.0%   -85.2    15.4
+     9   Second    100    100   100.0%   -84.7    13.4
+    10   Second    100    100   100.0%  -100.2     6.8
 
 主 SF = 8, 窗口 SF = [8, 9, 10, 11]:
     SF     Role     TX     RX      PRR     RSSI      SNR
   --------------------------------------------------
-     8  Primary    100    100   100.0%  -109.5     2.0
-     9   Second    100    100   100.0%  -113.0    -5.5
-    10   Second    100    100   100.0%  -105.0     6.5
-    11   Second    100    100   100.0%  -111.8    -2.1
+     8  Primary    100    100   100.0%  -101.0     6.5
+     9   Second    100    100   100.0%   -85.8    12.3
+    10   Second    100    100   100.0%   -84.1    12.5
+    11   Second    100    100   100.0%  -100.3     5.0
 
 ======================================================================
 【性能对比】
 
   SF5: 主 SF PRR=100.0%, 次 SF PRR=N/A
-  SF6: 主 SF PRR=100.0%, 次 SF PRR=99.0%, 差异=+1.0%
-  SF7: 主 SF PRR=100.0%, 次 SF PRR=100.0%, 差异=+0.0%
+  SF6: 主 SF PRR=100.0%, 次 SF PRR=100.0%, 差异=+0.0%
+  SF7: 主 SF PRR=100.0%, 次 SF PRR=99.5%, 差异=+0.5%
   SF8: 主 SF PRR=100.0%, 次 SF PRR=100.0%, 差异=+0.0%
   SF9: 主 SF PRR=N/A, 次 SF PRR=100.0%
   SF10: 主 SF PRR=N/A, 次 SF PRR=100.0%
