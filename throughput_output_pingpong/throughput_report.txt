@@ -1,0 +1,28 @@
+======================================================================
+AeroLink Gateway Throughput Test Report [PingPong]
+测试时间: 2026-03-20 16:22:20
+======================================================================
+
+【测试参数】
+  模式: PingPong
+  SF: [8]
+  Payload sizes: [250] bytes
+  Packets per config: 100
+  Frequency: 1400.0 MHz
+  Bandwidth: 125 kHz
+  TX Power: 22 dBm
+  Coding Rate: 4/5
+
+【测试结果】
+  SF  Payload   Sent   Recv  Match  NoMatch     PRR%   Throughput  Theoretical     RSSI      SNR
+----------------------------------------------------------------------------------------------------
+   8      250    100     10     10        0    10.0%      2356.8      2542.6   -42.9    15.0
+
+
+【吞吐量汇总】
+  SF8: 平均 Throughput=2356.8 bps, 平均 PRR=10.0%
+
+
+【最佳配置】
+  最高吞吐量: SF=8, Payload=250B, Throughput=2356.8 bps
+  最高 PRR: SF=8, Payload=250B, PRR=10.0%

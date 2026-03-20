@@ -1,0 +1,2 @@
+SF,payload_size,packets_sent,packets_received,packets_matched,packets_unmatched,PRR(%),throughput_bps,theoretical_throughput_bps,avg_rssi,avg_snr,toa_ms,total_duration_s
+8,250,100,10,10,0,10.00,2356.79,2542.61,-42.90,15.00,786.59,8.49

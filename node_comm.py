@@ -356,7 +356,7 @@ def calc_time_on_air(
         payload_symbols = 8 + max(math.ceil(numerator / denominator) * (cr + 4), 0)
 
     t_payload = payload_symbols * t_sym
-    return t_preamble + t_payload
+    return t_preamble + t_payload + 0.1
 
 
 # ============================================================

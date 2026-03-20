@@ -96,10 +96,10 @@ void setupMultiSfRx(uint8_t mainSf);
 uint8_t getSfFromDetector(uint8_t detector);
 uint8_t getBwCode(float bandwidth);
 uint8_t getCrCode(uint8_t codingRate);
-uint8_t getLdroSetting(uint8_t sf, float bandwidth);
+uint8_t getLdroSetting(uint8_t sf, int bwCode);
 
 void setup() {
-    Serial.setRxBufferSize(4096);
+    Serial.setRxBufferSize(8192); // 设置串口接收缓冲区大小为 8192 字节，确保能处理大数据包
     Serial.setTxBufferSize(4096);
     Serial.begin(115200);
     // set serial buffer size to maximum for fast transfers
@@ -214,16 +214,18 @@ uint8_t getCrCode(uint8_t codingRate) {
 // 获取 LDRO (Low Data Rate Optimization) 设置
 // LDRO = 0 (OFF): SF5-10 任意BW, SF11 + BW>=250, SF12 + BW>=406
 // LDRO = 1 (ON): SF11 + BW125, SF12 + BW125/250
-uint8_t getLdroSetting(uint8_t sf, float bandwidth) {
-    if (sf <= 10) {
-        return LR2021_LORA_LDRO_OFF;
-    }
-    if (sf == 11 && bandwidth >= 250.0f) {
-        return LR2021_LORA_LDRO_OFF;
-    }
-    if (sf == 12 && bandwidth >= 400.0f) {
-        return LR2021_LORA_LDRO_OFF;
-    }
+uint8_t getLdroSetting(uint8_t sf, int bwCode) {
+    if (sf <= LR2021_LORA_SF10) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF11 && bwCode == LR2021_LORA_BW_250) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF11 && bwCode == LR2021_LORA_BW_406) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF11 && bwCode == LR2021_LORA_BW_500) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF11 && bwCode == LR2021_LORA_BW_812) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF11 && bwCode == LR2021_LORA_BW_1000) return LR2021_LORA_LDRO_OFF;
+
+    if (sf == LR2021_LORA_SF12 && bwCode == LR2021_LORA_BW_406) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF12 && bwCode == LR2021_LORA_BW_500) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF12 && bwCode == LR2021_LORA_BW_812) return LR2021_LORA_LDRO_OFF;
+    if (sf == LR2021_LORA_SF12 && bwCode == LR2021_LORA_BW_1000) return LR2021_LORA_LDRO_OFF;
     return LR2021_LORA_LDRO_ON;
 }
 
@@ -262,24 +264,8 @@ void setupMultiSfRx(uint8_t mainSf) {
         sideSf2 = 11;
         sideSf3 = 12;
         break;
-    case 10:
-        sideSf1 = 11;
-        sideSf2 = 12;
-        sideSf3 = 0;  // SF13 不存在
-        break;
-    case 11:
-        sideSf1 = 12;
-        sideSf2 = 0;
-        sideSf3 = 0;
-        break;
-    case 12:
-        // SF12 是最高的，没有 side SF
-        sideSf1 = 0;
-        sideSf2 = 0;
-        sideSf3 = 0;
-        break;
     default:
-        // 未知 SF，使用 SF9 作为默认
+        configuredMainSf = 9; // 默认主 SF 设置为 9，确保至少有一个 SF 可用
         mainSf = 9;
         sideSf1 = 10;
         sideSf2 = 11;
@@ -651,7 +637,7 @@ void handleSetLoRaParam(const PacketDecoder::DecodedPacket& packet) {
     }
 }
 
-// 处理发送数据命令（新格式: len(4) + target_sf(1) + data(N)）
+// 处理发送数据命令（新格式: len(4) + target_sf(1) + tx_power(1) + data(N)）
 // 收到数据后立即发送，不进行聚合
 void handleTxData(const PacketDecoder::DecodedPacket& packet) {
     if (currentMode != NodeWorkingMode::TX) {
@@ -659,16 +645,18 @@ void handleTxData(const PacketDecoder::DecodedPacket& packet) {
         return;
     }
 
-    // 新格式: TxDataPacket 包含 len(4) + target_sf(1) + data[]
-    if (packet.data.size() >= sizeof(int) + sizeof(uint8_t)) {
+    // 新格式: TxDataPacket 包含 len(4) + target_sf(1) + tx_power(1) + data[]
+    constexpr size_t headerSize = sizeof(int) + sizeof(uint8_t) + sizeof(int8_t);
+    if (packet.data.size() >= headerSize) {
         const TxDataPacket* txData =
             reinterpret_cast<const TxDataPacket*>(packet.data.data());
 
-        size_t actualDataSize = packet.data.size() - sizeof(int) - sizeof(uint8_t);
+        size_t actualDataSize = packet.data.size() - headerSize;
         uint8_t targetSf = txData->target_sf;
+        int8_t targetTxPower = txData->tx_power;
 
         if (actualDataSize > 0 && txData->len > 0) {
-            const uint8_t* dataPtr = packet.data.data() + sizeof(int) + sizeof(uint8_t);
+            const uint8_t* dataPtr = packet.data.data() + headerSize;
             size_t dataToSend = (actualDataSize < (size_t)txData->len) ? actualDataSize : txData->len;
 
             // 检查数据大小
@@ -687,9 +675,20 @@ void handleTxData(const PacketDecoder::DecodedPacket& packet) {
                     targetSf,
                     getBwCode(currentLoRaParams.bandwidth),
                     getCrCode(currentLoRaParams.coding_rate),
-                    getLdroSetting(targetSf, currentLoRaParams.bandwidth)
+                    getLdroSetting(targetSf, getBwCode(currentLoRaParams.bandwidth))
                 );
                 sfChanged = true;
+            }
+
+            // 如果指定了发射功率，则临时切换 PA 配置
+            bool powerChanged = false;
+            int8_t originalPower = currentLoRaParams.tx_power;
+            uint32_t freqHz = (uint32_t)(currentLoRaParams.frequency * 1000000);
+
+            if (targetTxPower != 0 && targetTxPower != originalPower) {
+                DEBUG_PRINTF("Switching TX power from %d to %d dBm\n", originalPower, targetTxPower);
+                radio.configurePaForFrequency(freqHz, targetTxPower);
+                powerChanged = true;
             }
 
             // 立即发送数据
@@ -703,6 +702,11 @@ void handleTxData(const PacketDecoder::DecodedPacket& packet) {
                 DEBUG_PRINTLN(F("Transmission failed"));
             }
 
+            // 发送 TX_DONE 通知上位机
+            TxDonePayload txDone;
+            txDone.success = success ? 1 : 0;
+            sendToHost(PacketType::TX_DONE, reinterpret_cast<const uint8_t*>(&txDone), sizeof(txDone));
+
             // 恢复原来的 SF
             if (sfChanged) {
                 DEBUG_PRINTF("Restoring SF to %d\n", originalSf);
@@ -710,8 +714,14 @@ void handleTxData(const PacketDecoder::DecodedPacket& packet) {
                     originalSf,
                     getBwCode(currentLoRaParams.bandwidth),
                     getCrCode(currentLoRaParams.coding_rate),
-                    getLdroSetting(originalSf, currentLoRaParams.bandwidth)
+                    getLdroSetting(originalSf, getBwCode(currentLoRaParams.bandwidth))
                 );
+            }
+
+            // 恢复原来的发射功率
+            if (powerChanged) {
+                DEBUG_PRINTF("Restoring TX power to %d dBm\n", originalPower);
+                radio.configurePaForFrequency(freqHz, originalPower);
             }
         }
     }
@@ -736,7 +746,7 @@ void configureLoRa(const LoRaParam& params) {
         params.spreading_factor,
         getBwCode(params.bandwidth),
         getCrCode(params.coding_rate),
-        getLdroSetting(params.spreading_factor, params.bandwidth)
+        getLdroSetting(params.spreading_factor, getBwCode(params.bandwidth))
     );
 
     // 设置同步字

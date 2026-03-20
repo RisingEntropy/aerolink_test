@@ -1,0 +1,226 @@
+[
+  {
+    "sf": 5,
+    "payload_size": 250,
+    "num_channels": 4,
+    "packets_per_channel": 100,
+    "total_sent": 400,
+    "total_received": 392,
+    "prr": 98.0,
+    "total_duration": 14.69521689414978,
+    "total_throughput_bps": 53350.69265375139,
+    "theoretical_single_ch_bps": 15625.0,
+    "theoretical_total_bps": 62500.0,
+    "toa_ms": 235.744,
+    "per_channel": {
+      "0": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 14.689467906951904,
+        "throughput_bps": 13615.197042320944,
+        "avg_rssi": -28.0,
+        "avg_snr": 10.18,
+        "frequency": 1300.0
+      },
+      "1": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 14.69455099105835,
+        "throughput_bps": 13610.487324294578,
+        "avg_rssi": -23.0,
+        "avg_snr": 10.42,
+        "frequency": 1310.0
+      },
+      "2": {
+        "sent": 100,
+        "received": 96,
+        "prr": 96.0,
+        "duration": 14.677452087402344,
+        "throughput_bps": 13081.289508333233,
+        "avg_rssi": -23.0,
+        "avg_snr": 10.3125,
+        "frequency": 1320.0
+      },
+      "3": {
+        "sent": 100,
+        "received": 96,
+        "prr": 96.0,
+        "duration": 14.666916847229004,
+        "throughput_bps": 13090.685793059107,
+        "avg_rssi": -37.0,
+        "avg_snr": 10.197916666666666,
+        "frequency": 1330.0
+      }
+    }
+  },
+  {
+    "sf": 6,
+    "payload_size": 250,
+    "num_channels": 4,
+    "packets_per_channel": 100,
+    "total_sent": 400,
+    "total_received": 400,
+    "prr": 100.0,
+    "total_duration": 23.635030031204224,
+    "total_throughput_bps": 33848.06361336531,
+    "theoretical_single_ch_bps": 9375.0,
+    "theoretical_total_bps": 37500.0,
+    "toa_ms": 327.96799999999996,
+    "per_channel": {
+      "0": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 23.627590894699097,
+        "throughput_bps": 8464.680165292284,
+        "avg_rssi": -28.0,
+        "avg_snr": 13.15,
+        "frequency": 1300.0
+      },
+      "1": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 23.635030031204224,
+        "throughput_bps": 8462.015903341327,
+        "avg_rssi": -23.02,
+        "avg_snr": 13.08,
+        "frequency": 1310.0
+      },
+      "2": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 23.633378744125366,
+        "throughput_bps": 8462.607152594072,
+        "avg_rssi": -23.0,
+        "avg_snr": 13.06,
+        "frequency": 1320.0
+      },
+      "3": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 23.63328194618225,
+        "throughput_bps": 8462.641814007904,
+        "avg_rssi": -37.0,
+        "avg_snr": 13.25,
+        "frequency": 1330.0
+      }
+    }
+  },
+  {
+    "sf": 7,
+    "payload_size": 250,
+    "num_channels": 4,
+    "packets_per_channel": 100,
+    "total_sent": 400,
+    "total_received": 393,
+    "prr": 98.25,
+    "total_duration": 39.954840898513794,
+    "total_throughput_bps": 19672.20948261208,
+    "theoretical_single_ch_bps": 5468.75,
+    "theoretical_total_bps": 21875.0,
+    "toa_ms": 489.37600000000003,
+    "per_channel": {
+      "0": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 39.950884103775024,
+        "throughput_bps": 5006.147034956397,
+        "avg_rssi": -28.0,
+        "avg_snr": 14.72,
+        "frequency": 1300.0
+      },
+      "1": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 39.954773902893066,
+        "throughput_bps": 5005.659661248097,
+        "avg_rssi": -23.0,
+        "avg_snr": 14.84,
+        "frequency": 1310.0
+      },
+      "2": {
+        "sent": 100,
+        "received": 98,
+        "prr": 98.0,
+        "duration": 39.94543194770813,
+        "throughput_bps": 4906.693717984579,
+        "avg_rssi": -23.0,
+        "avg_snr": 15.204081632653061,
+        "frequency": 1320.0
+      },
+      "3": {
+        "sent": 100,
+        "received": 95,
+        "prr": 95.0,
+        "duration": 39.95080614089966,
+        "throughput_bps": 4755.848964096056,
+        "avg_rssi": -37.0,
+        "avg_snr": 14.76842105263158,
+        "frequency": 1330.0
+      }
+    }
+  },
+  {
+    "sf": 8,
+    "payload_size": 250,
+    "num_channels": 4,
+    "packets_per_channel": 100,
+    "total_sent": 400,
+    "total_received": 398,
+    "prr": 99.5,
+    "total_duration": 69.71004605293274,
+    "total_throughput_bps": 11418.727214662511,
+    "theoretical_single_ch_bps": 3125.0,
+    "theoretical_total_bps": 12500.0,
+    "toa_ms": 786.592,
+    "per_channel": {
+      "0": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 69.65990996360779,
+        "throughput_bps": 2871.0918533269046,
+        "avg_rssi": -28.0,
+        "avg_snr": 16.23,
+        "frequency": 1300.0
+      },
+      "1": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 69.71004605293274,
+        "throughput_bps": 2869.0269383574146,
+        "avg_rssi": -23.01,
+        "avg_snr": 16.53,
+        "frequency": 1310.0
+      },
+      "2": {
+        "sent": 100,
+        "received": 100,
+        "prr": 100.0,
+        "duration": 69.69692897796631,
+        "throughput_bps": 2869.566893876015,
+        "avg_rssi": -23.0,
+        "avg_snr": 16.31,
+        "frequency": 1320.0
+      },
+      "3": {
+        "sent": 100,
+        "received": 98,
+        "prr": 98.0,
+        "duration": 69.70252275466919,
+        "throughput_bps": 2811.949872888503,
+        "avg_rssi": -37.0,
+        "avg_snr": 15.010204081632653,
+        "frequency": 1330.0
+      }
+    }
+  }
+]

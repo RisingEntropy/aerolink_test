@@ -1,0 +1,2 @@
+tx_power,sent,received,crc_ok,crc_fail,prr,avg_rssi,min_rssi,max_rssi,std_rssi,avg_snr,min_snr,max_snr,std_snr,status
+3,100,100,100,0,100.00,0.0,0.0,0.0,0.0,15.25,15.0,16.0,0.4330127018922193,OK
